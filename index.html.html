@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plombier Express – Intervention Rapide 24h/7j</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1b2e42;
+    --blue: #1565C0;
+    --blue-bright: #1E88E5;
+    --orange: #E65100;
+    --orange-light: #FF6D00;
+    --gold: #FFC107;
+    --white: #ffffff;
+    --off-white: #f5f7fa;
+    --gray: #90a4ae;
+    --light-gray: #e8edf2;
+    --text: #1a2332;
+    --text-muted: #546e7a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── TOP BANNER ── */
+  .top-banner {
+    background: var(--orange);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    animation: pulse-bg 3s ease-in-out infinite;
+  }
+  @keyframes pulse-bg {
+    0%, 100% { background: var(--orange); }
+    50% { background: var(--orange-light); }
+  }
+  .top-banner span { margin: 0 6px; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    background: var(--navy);
+    overflow: hidden;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=80');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.18;
+  }
+
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(13,27,42,0.97) 45%, rgba(21,101,192,0.7) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(230,81,0,0.9);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    animation: flash 2s ease-in-out infinite;
+  }
+  @keyframes flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+  .dot { width: 8px; height: 8px; background: #FFD600; border-radius: 50%; animation: blink 1s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 6vw, 80px);
+    color: white;
+    line-height: 1.0;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .hero-title .accent { color: var(--gold); }
+
+  .hero-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 36px;
+    max-width: 500px;
+    line-height: 1.8;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 36px;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.5px; }
+
+  .trust-badges {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+  }
+  .trust-badge svg { flex-shrink: 0; }
+
+  /* ── FORM CARD ── */
+  .form-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 36px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    border-top: 5px solid var(--orange);
+    position: relative;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: 30px; right: 30px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--orange), var(--gold));
+    border-radius: 0 0 4px 4px;
+  }
+
+  .form-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .form-urgency {
+    background: #fff3e0;
+    border: 1px solid #ffcc80;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #e65100;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .form-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .form-sub { font-size: 14px; color: var(--text-muted); }
+
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid #dde3ea;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: #fafbfc;
+    transition: all 0.2s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--blue-bright);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(30,136,229,0.1);
+  }
+  .form-group textarea { resize: none; height: 90px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .btn-primary {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--orange), var(--orange-light));
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.25s;
+    box-shadow: 0 8px 24px rgba(230,81,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(230,81,0,0.45);
+  }
+  .btn-primary:active { transform: translateY(0); }
+
+  .form-secure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ── SUCCESS ── */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 20px;
+  }
+  .success-icon {
+    width: 64px; height: 64px;
+    background: #e8f5e9;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .success-msg h3 { font-size: 22px; color: #2e7d32; margin-bottom: 8px; }
+  .success-msg p { font-size: 14px; color: var(--text-muted); }
+
+  /* ── SECTION: WHY US ── */
+  .section { padding: 80px 40px; }
+  .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .section-tag {
+    display: inline-block;
+    background: #e3f2fd;
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 4vw, 52px);
+    letter-spacing: 1px;
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+  .section-sub { font-size: 17px; color: var(--text-muted); max-width: 500px; line-height: 1.7; }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 60px;
+  }
+  .why-image {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  .why-image img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+  }
+  .why-image-badge {
+    position: absolute;
+    bottom: 20px; left: 20px;
+    background: var(--orange);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .why-image-badge span { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; line-height: 1; }
+
+  .why-list { display: flex; flex-direction: column; gap: 20px; }
+  .why-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 22px;
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--light-gray);
+    transition: all 0.25s;
+  }
+  .why-item:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); transform: translateX(4px); }
+  .why-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 22px;
+  }
+  .why-icon.blue { background: #e3f2fd; }
+  .why-icon.orange { background: #fff3e0; }
+  .why-icon.green { background: #e8f5e9; }
+  .why-icon.gold { background: #fffde7; }
+  .why-text h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .why-text p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── SERVICES ── */
+  .services-bg { background: var(--navy); padding: 80px 40px; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .service-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .service-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+  .service-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+  }
+  .service-body { padding: 22px; }
+  .service-icon { font-size: 28px; margin-bottom: 12px; }
+  .service-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: white; margin-bottom: 8px; }
+  .service-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+  .testimonial-card {
+    background: white;
+    border-radius: 18px;
+    padding: 28px;
+    border: 1px solid var(--light-gray);
+    position: relative;
+  }
+  .testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 12px; right: 24px;
+    font-size: 80px;
+    color: #e3f2fd;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .stars { color: var(--gold); font-size: 16px; margin-bottom: 12px; }
+  .testimonial-text { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .author-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; color: white;
+  }
+  .author-name { font-weight: 700; font-size: 14px; color: var(--navy); }
+  .author-city { font-size: 12px; color: var(--gray); }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--orange) 0%, #bf360c 100%);
+    padding: 70px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='28'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+  }
+  .cta-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: white; letter-spacing: 2px; margin-bottom: 16px; }
+  .cta-sub { font-size: 18px; color: rgba(255,255,255,0.85); margin-bottom: 36px; }
+  .btn-white {
+    display: inline-block;
+    background: white;
+    color: var(--orange);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1.5px;
+    padding: 18px 48px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.25s;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+  .btn-white:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(0,0,0,0.3); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 50px 40px 30px;
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-grid {
+    max-width: 1200px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 30px;
+  }
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 30px; color: white; letter-spacing: 2px; margin-bottom: 12px; }
+  .footer-brand span { color: var(--orange-light); }
+  .footer-desc { font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+  .footer-contact a { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; margin-bottom: 8px; }
+  .footer-h { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1px; color: white; margin-bottom: 16px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 8px; }
+  .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+  .rgpd-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto 24px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero-content { grid-template-columns: 1fr; gap: 40px; }
+    .why-grid, .services-grid, .testimonials-grid, .footer-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .section, .services-bg { padding: 60px 20px; }
+    .hero-content { padding: 60px 20px; }
+  }
+  @media (max-width: 600px) {
+    .hero-stats { gap: 20px; }
+    .stat-num { font-size: 32px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BANNER -->
+<div class="top-banner">
+  <span>🔴</span> URGENCE PLOMBERIE — Intervention en 30 min dans votre ville <span>📞</span> Devis 100% Gratuit <span>✅</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <div class="dot"></div>
+        Disponible 24h/24 – 7j/7
+      </div>
+      <h1 class="hero-title">
+        BESOIN D'UN<br>
+        PLOMBIER<br>
+        <span class="accent">RAPIDEMENT ?</span>
+      </h1>
+      <p class="hero-sub">
+        Fuite d'eau, canalisation bouchée, chauffe-eau en panne… Nos plombiers certifiés interviennent en moins de 30 minutes près de chez vous.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">+5000</span>
+          <span class="stat-label">Clients satisfaits</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">30 MIN</span>
+          <span class="stat-label">Délai d'intervention</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">4.9★</span>
+          <span class="stat-label">Note moyenne</span>
+        </div>
+      </div>
+      <div class="trust-badges">
+        <div class="trust-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" fill="#4CAF50"/></svg>
+          Artisans certifiés RGE
+        </div>
+        <div class="trust-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#FFC107" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#FFC107" stroke-width="2"/></svg>
+          Paiement sécurisé
+        </div>
+        <div class="trust-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4" stroke="#2196F3" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="#2196F3" stroke-width="2"/></svg>
+          Devis gratuit & sans engagement
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <div class="form-card">
+      <div class="form-header">
+        <div class="form-urgency">
+          🔥 Réponse garantie en moins de 30 minutes !
+        </div>
+        <div class="form-title">Demande de Devis Gratuit</div>
+        <div class="form-sub">Remplissez le formulaire — un expert vous rappelle</div>
+      </div>
+
+      <form id="leadForm">
+        <div class="form-group">
+          <label>Votre prénom & nom *</label>
+          <input type="text" placeholder="Ex : Jean-Pierre Dupont" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Téléphone *</label>
+            <input type="tel" placeholder="06 XX XX XX XX" required>
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" placeholder="vous@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Adresse complète *</label>
+          <input type="text" placeholder="Rue, ville, code postal" required>
+        </div>
+        <div class="form-group">
+          <label>Type de problème</label>
+          <select>
+            <option value="">Sélectionnez votre problème...</option>
+            <option>Fuite d'eau / dégât des eaux</option>
+            <option>Canalisation bouchée</option>
+            <option>Chauffe-eau en panne</option>
+            <option>Installation sanitaire</option>
+            <option>Rénovation salle de bain</option>
+            <option>Autre problème</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description (optionnel)</label>
+          <textarea placeholder="Décrivez brièvement votre problème..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary">
+          🔥 Recevoir Mon Devis Gratuit
+        </button>
+        <div class="form-secure">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="11" rx="2" stroke="#90a4ae" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#90a4ae" stroke-width="2"/></svg>
+          Données sécurisées — Conformité RGPD
+        </div>
+      </form>
+
+      <div class="success-msg" id="successMsg">
+        <div class="success-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 7" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Demande envoyée avec succès !</h3>
+        <p>Un expert plombier vous contactera dans les 30 minutes.<br>Vérifiez votre téléphone et vos emails.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-tag">Pourquoi nous choisir</div>
+    <h2 class="section-title">Des plombiers professionnels,<br>à votre service</h2>
+    <p class="section-sub">Nous sélectionnons les meilleurs artisans pour garantir un service rapide, fiable et au meilleur prix.</p>
+
+    <div class="why-grid">
+      <div class="why-image">
+        <img src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=800&q=80" alt="Plombier professionnel au travail">
+        <div class="why-image-badge">
+          <span>+10 ANS</span>
+          D'expérience
+        </div>
+      </div>
+      <div class="why-list">
+        <div class="why-item">
+          <div class="why-icon orange">⚡</div>
+          <div class="why-text">
+            <h4>Intervention Ultra-Rapide</h4>
+            <p>Nos plombiers sont disponibles 24h/24, 7j/7. Délai d'intervention garanti en moins de 30 minutes sur votre secteur.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon blue">🏅</div>
+          <div class="why-text">
+            <h4>Professionnels Certifiés RGE</h4>
+            <p>Tous nos artisans sont certifiés, assurés et formés aux dernières normes. Garantie décennale sur chaque intervention.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon green">💰</div>
+          <div class="why-text">
+            <h4>Devis Gratuit & Transparent</h4>
+            <p>Obtenez un devis détaillé et gratuit avant toute intervention. Aucune mauvaise surprise sur la facture finale.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-icon gold">⭐</div>
+          <div class="why-text">
+            <h4>Note 4.9/5 — 5000+ Avis Clients</h4>
+            <p>Des milliers de clients satisfaits font confiance à notre réseau. Consultez les avis vérifiés avant de choisir.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-bg">
+  <div class="section-inner">
+    <div style="color: #fff; margin-bottom: 0;">
+      <div class="section-tag" style="background:rgba(255,255,255,0.15); color: #fff;">Nos Interventions</div>
+      <h2 class="section-title" style="color: white;">Tous types de travaux<br><span style="color: var(--gold);">de plomberie</span></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80" class="service-img" alt="Fuite d'eau">
+        <div class="service-body">
+          <div class="service-icon">💧</div>
+          <div class="service-title">Fuites & Dégâts des Eaux</div>
+          <div class="service-desc">Détection et réparation rapide de fuites, robinets, joints et canalisations. Intervention d'urgence disponible.</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80" class="service-img" alt="Débouchage canalisation">
+        <div class="service-body">
+          <div class="service-icon">🔧</div>
+          <div class="service-title">Débouchage Canalisations</div>
+          <div class="service-desc">Débouchage WC, évier, douche et siphons. Utilisation de matériel professionnel haute pression.</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" class="service-img" alt="Chauffe-eau">
+        <div class="service-body">
+          <div class="service-icon">🔥</div>
+          <div class="service-title">Chauffe-eau & Chauffage</div>
+          <div class="service-desc">Installation, dépannage et remplacement de chauffe-eau, cumulus, chaudières. Toutes marques.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" style="background: var(--off-white);">
+  <div class="section-inner">
+    <div class="section-tag">Avis clients vérifiés</div>
+    <h2 class="section-title">Ils nous font confiance</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">Intervention en moins de 25 minutes pour une fuite sous évier. Travail propre, tarif honnête. Je recommande vivement à tous mes voisins !</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">TD</div>
+          <div>
+            <div class="author-name">Thomas Dubois</div>
+            <div class="author-city">Lyon — il y a 3 jours</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">Service exceptionnel ! Mon chauffe-eau est tombé en panne un dimanche soir. Remplacement effectué dès le lendemain matin. Très professionnel.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: #e65100;">CM</div>
+          <div>
+            <div class="author-name">Claire Martin</div>
+            <div class="author-city">Paris — il y a 1 semaine</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">WC bouché un vendredi soir. Plombier arrivé en 20 min, problème résolu en 30 min. Prix conforme au devis. Bravo pour la rapidité !</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: #388e3c;">PL</div>
+          <div>
+            <div class="author-name">Pierre Lefevre</div>
+            <div class="author-city">Marseille — il y a 2 semaines</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="cta-inner">
+    <div class="cta-title">UNE URGENCE EN CE MOMENT ?</div>
+    <p class="cta-sub">Ne laissez pas une fuite d'eau aggraver les dégâts. Contactez-nous maintenant et recevez un devis en 10 minutes.</p>
+    <a href="#leadForm" class="btn-white" onclick="document.getElementById('leadForm').scrollIntoView({behavior:'smooth'}); return false;">
+      🔥 Obtenir Mon Devis Gratuit
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Plombier<span>Express</span></div>
+      <p class="footer-desc">Votre réseau de plombiers professionnels certifiés. Intervention rapide, devis gratuit, disponible 24h/24 et 7j/7 dans toute la région.</p>
+      <div class="footer-contact">
+        <a href="mailto:contact@fixeproxi.fr">✉️ contact@fixeproxi.fr</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-h">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Urgences plomberie</a></li>
+        <li><a href="#">Débouchage canalisations</a></li>
+        <li><a href="#">Chauffe-eau & cumulus</a></li>
+        <li><a href="#">Rénovation salle de bain</a></li>
+        <li><a href="#">Installation sanitaire</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-h">Informations</div>
+      <ul class="footer-links">
+        <li><a href="#">Mentions légales</a></li>
+        <li><a href="#">Politique de confidentialité</a></li>
+        <li><a href="#">Conditions d'utilisation</a></li>
+        <li><a href="#">Nous contacter</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rgpd-box">
+    <strong style="color: rgba(255,255,255,0.85);">🔒 Protection des données (RGPD)</strong><br>
+    Vos informations sont utilisées uniquement pour vous mettre en relation avec des professionnels qualifiés dans votre région. En soumettant ce formulaire, vous acceptez que vos données soient transmises à un ou plusieurs partenaires afin de répondre à votre demande. Conformément au RGPD, vous pouvez demander la suppression de vos données à tout moment en nous contactant à : <a href="mailto:contact@fixeproxi.fr" style="color: var(--gold);">contact@fixeproxi.fr</a>. Vos données ne seront jamais vendues sans votre consentement explicite.
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 PlombierExpress — Tous droits réservés</span>
+    <span>Entreprise : Fixeproxi</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('leadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxpsIec6WaprKdZj58INegN0FXQ6hwFRC-f9r2xHaGl50Jhe3HphfFLQNx5ywYuZqZ5/exec';
+
+    const inputs = this.querySelectorAll('input, select, textarea');
+    const data = {
+      nom:       inputs[0].value,
+      telephone: inputs[1].value,
+      email:     inputs[2].value,
+      adresse:   inputs[3].value,
+      probleme:  inputs[4].value
+    };
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    document.getElementById('leadForm').style.display = 'none';
+    document.getElementById('successMsg').style.display = 'block';
+    document.querySelector('.form-header').style.display = 'none';
+  });
+</script>
+</body>
+</html>
